@@ -1,0 +1,22 @@
+# .NET
+**/bin/
+**/obj/
+**/.vs/
+*.user
+*.suo
+
+# Secrets — never commit real connection strings/passwords
+**/appsettings.Local.json
+**/appsettings.*.local.json
+**/secrets.json
+
+# Node / Frontend
+Frontend/node_modules/
+Frontend/dist/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json

@@ -1,0 +1,203 @@
+:root {
+  --flour: #f7f1ea;
+  --blush: #f3e0d8;
+  --chocolate: #3b2a24;
+  --cocoa: #6b4a3f;
+  --berry: #9a3b4a;
+  --berry-dark: #7e2f3c;
+  --cream: #fffaf6;
+  --line: rgba(59, 42, 36, 0.14);
+  --ok: #2f6b4f;
+  --bad: #9a3b4a;
+  --display: 'Cormorant Garamond', Georgia, serif;
+  --body: 'Source Sans 3', system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--body);
+  color: var(--chocolate);
+  background: var(--flour);
+}
+
+.login-page {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem 1.25rem;
+  overflow: hidden;
+}
+
+.login-atmosphere {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 15% 20%, rgba(243, 224, 216, 0.95), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 90% 80%, rgba(154, 59, 74, 0.12), transparent 50%),
+    linear-gradient(160deg, #f7f1ea 0%, #efe2d8 45%, #e8d2c8 100%);
+  z-index: 0;
+}
+
+.login-atmosphere::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1.2' fill='%236b4a3f' fill-opacity='0.12'/%3E%3C/svg%3E");
+}
+
+.login-panel {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 420px);
+  padding: 2.5rem 2rem 2.25rem;
+  background: color-mix(in srgb, var(--cream) 88%, transparent);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(6px);
+  animation: rise 0.7s ease both;
+}
+
+.brand {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(2.75rem, 8vw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: var(--chocolate);
+}
+
+.login-panel h1 {
+  margin: 0.85rem 0 0.35rem;
+  font-family: var(--display);
+  font-size: 1.55rem;
+  font-weight: 500;
+  color: var(--cocoa);
+}
+
+.subtitle {
+  margin: 0 0 1.75rem;
+  font-size: 0.98rem;
+  color: color-mix(in srgb, var(--cocoa) 80%, white);
+}
+
+.login-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.login-form label {
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--cocoa);
+}
+
+.login-form input {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: var(--cream);
+  color: var(--chocolate);
+  padding: 0.8rem 0.9rem;
+  font: inherit;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-form input:focus {
+  border-color: color-mix(in srgb, var(--berry) 55%, var(--line));
+  box-shadow: 0 0 0 3px rgba(154, 59, 74, 0.12);
+}
+
+.login-form button {
+  margin-top: 0.35rem;
+  border: 0;
+  background: var(--berry);
+  color: #fffaf6;
+  font: inherit;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 0.9rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.login-form button:hover:not(:disabled) {
+  background: var(--berry-dark);
+}
+
+.login-form button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.login-form button:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.login-message {
+  margin: 1rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.login-message.success {
+  color: var(--ok);
+}
+
+.login-message.error {
+  color: var(--bad);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .login-panel {
+    padding: 2rem 1.25rem;
+  }
+}
+.login-extra-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.secondary-btn {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--cocoa);
+  font: inherit;
+  font-weight: 600;
+  padding: 0.75rem 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.secondary-btn:hover {
+  background: rgba(59, 42, 36, 0.04);
+  border-color: color-mix(in srgb, var(--berry) 40%, var(--line));
+}
