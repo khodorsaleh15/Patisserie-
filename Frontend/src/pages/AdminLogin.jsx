@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import '../styles/admin.css'
+import cakeImage from '../assets/cakeloginpage1.jpg'
 
 const API_URL = 'http://localhost:5046'
 
-export default function AdminLogin() {
+export default function AdminLogin({ onGoToSignUp }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [status, setStatus] = useState({ type: '', text: '' })
@@ -18,7 +19,7 @@ export default function AdminLogin() {
       const res = await fetch(`${API_URL}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include', // required for httpOnly cookie
+        credentials: 'include',
         body: JSON.stringify({ email, password }),
       })
 
@@ -83,54 +84,70 @@ export default function AdminLogin() {
     <main className="login-page">
       <div className="login-atmosphere" aria-hidden="true" />
 
-      <section className="login-panel">
-        <p className="brand">Lollita</p>
-        <h1>Admin access</h1>
-        <p className="subtitle">Sign in to manage your patisserie.</p>
+      <div className="login-shell">
+        <section className="login-panel">
+          <header className="login-brand">
+            <p className="brand-name">K &amp; Z Patisserie</p>
+            <p className="subtitle">Welcome back. Manage your patisserie with care.</p>
+          </header>
 
-        <form className="login-form" onSubmit={handleLogin}>
-          <label>
-            Email
-            <input
-              type="email"
-              autoComplete="username"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </label>
+          <form className="login-form" onSubmit={handleLogin}>
+            <label>
+              Email
+              <input
+                type="email"
+                autoComplete="username"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="admin@example.com"
+                required
+              />
+            </label>
 
-          <label>
-            Password
-            <input
-              type="password"
-              autoComplete="current-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </label>
+            <label>
+              Password
+              <input
+                type="password"
+                autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                required
+              />
+            </label>
 
-          <button type="submit" disabled={loading}>
-            {loading ? 'Signing in…' : 'Login'}
-          </button>
-        </form>
+            <button type="submit" className="login-submit-btn" disabled={loading}>
+              {loading ? 'Signing in…' : 'Sign in'}
+            </button>
+          </form>
 
-        <div className="login-extra-actions">
-          <button type="button" className="secondary-btn" onClick={handleCheckMe}>
-            Check session
-          </button>
-          <button type="button" className="secondary-btn" onClick={handleLogout}>
-            Logout
-          </button>
-        </div>
-
-        {status.text ? (
-          <p className={`login-message ${status.type}`} role="status">
-            {status.text}
+          <p className="auth-switch">
+            Don&apos;t have an account?{' '}
+            <button type="button" className="auth-link" onClick={onGoToSignUp}>
+              Sign up
+            </button>
           </p>
-        ) : null}
-      </section>
+
+          <div className="login-extra-actions">
+            <button type="button" className="secondary-btn" onClick={handleCheckMe}>
+              Check session
+            </button>
+            <button type="button" className="secondary-btn" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
+
+          {status.text ? (
+            <p className={`login-message ${status.type}`} role="status">
+              {status.text}
+            </p>
+          ) : null}
+        </section>
+
+        <aside className="login-visual" aria-hidden="true">
+          <img src={cakeImage} alt="" className="login-cake" />
+        </aside>
+      </div>
     </main>
   )
 }

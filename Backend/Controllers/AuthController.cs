@@ -86,26 +86,35 @@ public class AuthController(AppDbContext db, IConfiguration config) : Controller
     }
 
     /// <summary>
-    /// Dev helper: create first admin. Remove later in production.
+    /// Create a new admin account and save it to the database.
     /// </summary>
-    [HttpPost("seed")]
-    public async Task<IActionResult> Seed([FromBody] LoginRequest request, CancellationToken cancellationToken)
+    [HttpPost("register")]
+    public async Task<IActionResult> Register([FromBody] RegisterRequest request, CancellationToken cancellationToken)
     {
         if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
         {
             return BadRequest(new { message = "Email and password are required." });
         }
 
+        if (request.Password.Length < 6)
+        {
+            return BadRequest(new { message = "Password must be at least 6 characters." });
+        }
+
         var email = request.Email.Trim().ToLowerInvariant();
         var exists = await db.Admins.AnyAsync(a => a.Email.ToLower() == email, cancellationToken);
         if (exists)
         {
-            return Conflict(new { message = "Admin already exists." });
+            return Conflict(new { message = "An account with this email already exists." });
         }
+
+        var fullName = string.IsNullOrWhiteSpace(request.FullName)
+            ? "K & Z Admin"
+            : request.FullName.Trim();
 
         db.Admins.Add(new Models.Admin
         {
-            FullName = "Lollita Admin",
+            FullName = fullName,
             Email = email,
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password),
             Role = "Admin",
@@ -114,7 +123,22 @@ public class AuthController(AppDbContext db, IConfiguration config) : Controller
         });
 
         await db.SaveChangesAsync(cancellationToken);
-        return Ok(new { message = "Admin created." });
+
+        return Ok(new { message = "Account created successfully. You can sign in now." });
+    }
+
+    /// <summary>
+    /// Dev helper: create first admin. Prefer /api/auth/register.
+    /// </summary>
+    [HttpPost("seed")]
+    public async Task<IActionResult> Seed([FromBody] LoginRequest request, CancellationToken cancellationToken)
+    {
+        return await Register(new RegisterRequest
+        {
+            Email = request.Email,
+            Password = request.Password,
+            FullName = "K & Z Admin"
+        }, cancellationToken);
     }
 
     private string CreateJwt(Models.Admin admin)
