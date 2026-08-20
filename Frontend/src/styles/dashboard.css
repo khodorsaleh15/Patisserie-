@@ -1,0 +1,21 @@
+.dashboard-page {
+  display: flex;
+  flex-direction: column;
+  background:
+    linear-gradient(180deg, #fff9fa 0%, #ffffff 45%, #f7e8eb 100%);
+  color: #5a3a28;
+  font-family: var(--body);
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 2rem 1.75rem;
+}
+
+.dashboard-placeholder {
+  margin: 0;
+  max-width: 36rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #c97b8c;
+}

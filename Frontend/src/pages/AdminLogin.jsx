@@ -4,7 +4,7 @@ import cakeImage from '../assets/cakeloginpage1.jpg'
 
 const API_URL = 'http://localhost:5046'
 
-export default function AdminLogin({ onGoToSignUp }) {
+export default function AdminLogin({ onGoToSignUp, onLoginSuccess }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [status, setStatus] = useState({ type: '', text: '' })
@@ -28,7 +28,11 @@ export default function AdminLogin({ onGoToSignUp }) {
       if (res.ok) {
         const msg = data.message || 'Login successful'
         setStatus({ type: 'success', text: msg })
-        alert(msg)
+        onLoginSuccess?.({
+          fullName: data.fullName || 'Admin',
+          email: data.email || email,
+          role: data.role || 'Admin',
+        })
       } else {
         const msg = data.message || 'Invalid email or password.'
         setStatus({ type: 'error', text: msg })

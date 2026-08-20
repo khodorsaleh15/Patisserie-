@@ -1,0 +1,189 @@
+.admin-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.85rem 1.75rem;
+  background: #f7e8eb;
+  border-bottom: 1px solid #e8c4cc;
+  box-shadow: 0 8px 24px rgba(90, 58, 40, 0.08);
+}
+
+.admin-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.admin-header-logo {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.admin-header-brand-text {
+  min-width: 0;
+}
+
+.admin-header-brand-name {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 1.45rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #6b1f2e;
+  line-height: 1.15;
+}
+
+.admin-header-brand-tag {
+  margin: 0.15rem 0 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #c97b8c;
+}
+
+.admin-header-welcome {
+  text-align: center;
+  min-width: 0;
+}
+
+.admin-header-welcome-label {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #c97b8c;
+}
+
+.admin-header-welcome-name {
+  margin: 0.2rem 0 0;
+  font-family: var(--display);
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  font-weight: 700;
+  color: #6b1f2e;
+  line-height: 1.15;
+  word-break: break-word;
+}
+
+.admin-header-welcome-email {
+  margin: 0.25rem 0 0;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #a86b7a;
+}
+
+.admin-header-meta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.65rem 0.85rem;
+}
+
+.admin-header-clock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.2;
+}
+
+.admin-header-clock-date {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #c97b8c;
+}
+
+.admin-header-clock-time {
+  font-family: var(--display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #6b1f2e;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.admin-header-role {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6b1f2e;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid #e8c4cc;
+}
+
+.admin-header-logout-btn {
+  border: 0;
+  background: #b85a6e;
+  color: #ffffff;
+  font: inherit;
+  font-family: var(--display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.55rem 1rem;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(184, 90, 110, 0.28);
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.admin-header-logout-btn:hover:not(:disabled) {
+  background: #a84d63;
+  box-shadow: 0 8px 18px rgba(184, 90, 110, 0.35);
+  transform: translateY(-1px);
+}
+
+.admin-header-logout-btn:disabled {
+  opacity: 0.75;
+  cursor: wait;
+}
+
+/* Space so page content is not hidden under the fixed header */
+.admin-page-with-header {
+  min-height: 100vh;
+  padding-top: 11rem;
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .admin-header {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 0.85rem 1.15rem 1rem;
+  }
+
+  .admin-header-brand {
+    justify-content: center;
+  }
+
+  .admin-header-logo {
+    width: 120px;
+    height: 120px;
+  }
+
+  .admin-header-meta {
+    justify-content: center;
+  }
+
+  .admin-header-clock {
+    align-items: center;
+  }
+
+  .admin-page-with-header {
+    padding-top: 18rem;
+  }
+}

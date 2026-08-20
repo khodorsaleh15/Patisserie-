@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import '../styles/admin.css'
+import signupImage from '../assets/signup.jpeg'
 
 const API_URL = 'http://localhost:5046'
 
@@ -60,82 +61,88 @@ export default function AdminSignUp({ onGoToSignIn }) {
   }
 
   return (
-    <main className="login-page signup-page">
+    <main className="login-page">
       <div className="login-atmosphere" aria-hidden="true" />
 
-      <section className="login-panel">
-        <header className="login-brand">
-          <p className="brand-name">K &amp; Z Patisserie</p>
-          <p className="subtitle">Create an admin account. It will be saved to your database.</p>
-        </header>
+      <div className="login-shell">
+        <section className="login-panel">
+          <header className="login-brand">
+            <p className="brand-name">K &amp; Z Patisserie</p>
+            <p className="subtitle">Create an admin account. It will be saved to your database.</p>
+          </header>
 
-        <form className="login-form" onSubmit={handleSignUp}>
-          <label>
-            Full name
-            <input
-              type="text"
-              autoComplete="name"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              placeholder="Your name"
-              required
-            />
-          </label>
+          <form className="login-form" onSubmit={handleSignUp}>
+            <label>
+              Full name
+              <input
+                type="text"
+                autoComplete="name"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                placeholder="Your name"
+                required
+              />
+            </label>
 
-          <label>
-            Email
-            <input
-              type="email"
-              autoComplete="username"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@example.com"
-              required
-            />
-          </label>
+            <label>
+              Email
+              <input
+                type="email"
+                autoComplete="username"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="admin@example.com"
+                required
+              />
+            </label>
 
-          <label>
-            Password
-            <input
-              type="password"
-              autoComplete="new-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              required
-            />
-          </label>
+            <label>
+              Password
+              <input
+                type="password"
+                autoComplete="new-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                required
+              />
+            </label>
 
-          <label>
-            Confirm password
-            <input
-              type="password"
-              autoComplete="new-password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="••••••••"
-              required
-            />
-          </label>
+            <label>
+              Confirm password
+              <input
+                type="password"
+                autoComplete="new-password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="••••••••"
+                required
+              />
+            </label>
 
-          <button type="submit" disabled={loading}>
-            {loading ? 'Creating…' : 'Create account'}
-          </button>
-        </form>
+            <button type="submit" className="login-submit-btn" disabled={loading}>
+              {loading ? 'Creating…' : 'Create account'}
+            </button>
+          </form>
 
-        <p className="auth-switch">
-          Already have an account?{' '}
-          <button type="button" className="auth-link" onClick={onGoToSignIn}>
-            Sign in
-          </button>
-        </p>
-
-        {status.text ? (
-          <p className={`login-message ${status.type}`} role="status">
-            {status.text}
+          <p className="auth-switch">
+            Already have an account?{' '}
+            <button type="button" className="auth-link" onClick={onGoToSignIn}>
+              Sign in
+            </button>
           </p>
-        ) : null}
-      </section>
+
+          {status.text ? (
+            <p className={`login-message ${status.type}`} role="status">
+              {status.text}
+            </p>
+          ) : null}
+        </section>
+
+        <aside className="login-visual" aria-hidden="true">
+          <img src={signupImage} alt="" className="login-cake" />
+        </aside>
+      </div>
     </main>
   )
 }
